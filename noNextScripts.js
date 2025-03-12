@@ -118,4 +118,29 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   });
+
+  const clientsSlider = Array.from(
+    document.querySelectorAll(".js-clients-slider")
+  );
+
+  clientsSlider.forEach((element) => {
+    new Swiper(element, {
+      spaceBetween: 0,
+      slidesPerView: 2,
+      watchSlidesProgress: true,
+      autoplay: true,
+      breakpoints: {
+        1199: {
+          slidesPerView: 6, // When window width is <= 1199px
+        },
+
+        768: {
+          slidesPerView: 4, // When window width is <= 768px
+        },
+        0: {
+          slidesPerView: 2, // When window width is <= 480px
+        },
+      },
+    });
+  });
 });
