@@ -49,4 +49,73 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   });
+
+  const testimonialsSliders = Array.from(
+    document.querySelectorAll(".testimonials-slider-3")
+  );
+
+  testimonialsSliders.forEach((slider) => {
+    new Swiper(slider, {
+      spaceBetween: 0,
+      slidesPerView: 1,
+      navigation: {
+        prevEl: slider.querySelector(".snbp7"),
+        nextEl: slider.querySelector(".snbn7"),
+      },
+      breakpoints: {
+        1199: {
+          slidesPerView: 3, // When window width is <= 1199px
+        },
+        1024: {
+          slidesPerView: 2,
+        },
+        768: {
+          slidesPerView: 1, // When window width is <= 768px
+        },
+        0: {
+          slidesPerView: 1, // When window width is <= 480px
+        },
+      },
+      watchSlidesProgress: true,
+    });
+  });
+
+  const faqAccordions = Array.from(
+    document.querySelectorAll(".js-faq-accordions")
+  );
+  faqAccordions.forEach((element) => {
+    let currentIndex = -1;
+    const questions = Array.from(element.querySelectorAll("dt a"));
+    const answers = Array.from(element.querySelectorAll("dd"));
+
+    const updateAccordions = () => {
+      questions.forEach((el) => {
+        el.classList.remove("active");
+      });
+      answers.forEach((el) => {
+        el.style.height = "0px";
+        el.style.overflow = "hidden";
+        el.style.transition = "all 0.5s ease-in-out";
+        el.style.marginBottom = "0px";
+      });
+      if (currentIndex !== -1) {
+        questions[currentIndex].classList.add("active");
+        const element = answers[currentIndex];
+        element.style.height = element.scrollHeight + "px";
+        element.style.overflow = "hidden";
+        element.style.transition = "all 0.5s ease-in-out";
+        element.style.marginBottom = "1.55em";
+      }
+    };
+
+    updateAccordions();
+
+    questions.forEach((question, index) => {
+      question.addEventListener("click", (event) => {
+        event.preventDefault();
+        currentIndex = currentIndex == index ? -1 : index;
+        updateAccordions();
+      });
+    });
+  });
 });
