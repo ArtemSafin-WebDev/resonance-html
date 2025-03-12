@@ -143,4 +143,19 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     });
   });
+
+  const mapSections = Array.from(document.querySelectorAll(".map-section"));
+  mapSections.forEach((section) => {
+    const open = section.querySelector(".mt-open");
+    const close = section.querySelector(".mt-close");
+
+    open.addEventListener("click", (event) => {
+      event.preventDefault();
+      section.classList.toggle("js-active");
+    });
+    close.addEventListener("click", (event) => {
+      event.preventDefault();
+      section.classList.toggle("js-active");
+    });
+  });
 });
