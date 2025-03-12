@@ -158,4 +158,39 @@ document.addEventListener("DOMContentLoaded", () => {
       section.classList.toggle("js-active");
     });
   });
+
+  const portfolios = Array.from(document.querySelectorAll(".js-portfolio"));
+  portfolios.forEach((element) => {
+    const container = element.querySelector(".js-portfolio-container");
+    let currentCategory = "all";
+    const filterLinks = Array.from(
+      element.querySelectorAll(".works-filter .filter")
+    );
+    const instance = new Isotope(container, {
+      itemSelector: ".work-item",
+      layoutMode: "masonry", // or 'fitRows', depending on your layout needs
+    });
+    imagesLoaded(container).on("progress", function () {
+      // Trigger Isotope layout
+      instance.layout();
+    });
+
+    const updateCategory = (val) => {
+      currentCategory = val;
+      instance.arrange({
+        filter: currentCategory == "all" ? "*" : "." + currentCategory,
+      });
+      //   isotope.value.layout();
+    };
+
+    filterLinks.forEach((link) => {
+      const category = link.getAttribute("data-category");
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        updateCategory(category);
+        filterLinks.forEach((link) => link.classList.remove("active"));
+        link.classList.add("active");
+      });
+    });
+  });
 });
