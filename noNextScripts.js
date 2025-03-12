@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       items.forEach((item) => item.classList.remove("show"));
       await new Promise((res) => setTimeout(() => res(), 270));
       items.forEach((item) => item.classList.remove("active"));
-      await new Promise((res) => setTimeout(() => res(), 100));
+      // await new Promise((res) => setTimeout(() => res(), 100));
       items[index]?.classList.add("active");
       requestAnimationFrame(() => {
         items[index]?.classList.add("show");
